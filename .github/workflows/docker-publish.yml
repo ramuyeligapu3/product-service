@@ -2,8 +2,10 @@ name: 🚀 Build and Push Docker Image
 
 on:
   push:
+    tags:
+      - 'v*'         # When you push a Git tag like v1.0.0
     branches:
-      - main
+      - main         # Still build on main pushes (optional)
 
 jobs:
   build:
@@ -22,11 +24,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 🛠️ Build and push
+      - name: 🛠️ Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./product-service
           push: true
           tags: |
             ramuyeligapu3/product-service:latest
+            ramuyeligapu3/product-service:${{ github.ref_name }}
             ramuyeligapu3/product-service:${{ github.sha }}
