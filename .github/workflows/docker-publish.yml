@@ -25,7 +25,7 @@ jobs:
       - name: 🛠️ Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./product-service
           push: true
           tags: |
             ramuyeligapu3/product-service:latest
